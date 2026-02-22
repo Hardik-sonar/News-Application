@@ -10,6 +10,7 @@ interface ApiService {
     @GET("api/v4/top-headlines")
     suspend fun getTopHeadlines(
         @Query("country") country: String = "in",
+        @Query("lang") language: String = "en",
         @Query("apikey") apiKey: String
     ): Response<NewsResponse>
 }
