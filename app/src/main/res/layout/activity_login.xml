@@ -26,7 +26,7 @@
                 android:layout_marginStart="120dp"
                 android:contentDescription="Profile Image"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher_round" />
+                android:src="@mipmap/newsapp" />
 
             <EditText
                 android:id="@+id/editTextName"

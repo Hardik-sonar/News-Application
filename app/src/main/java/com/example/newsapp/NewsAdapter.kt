@@ -1,5 +1,6 @@
 package com.example.newsapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,12 @@ import com.example.newsapp.R
 import com.example.newsapp.model.Article
 
 class NewsAdapter(
-    private val articleList: List<Article>
+    private val articleList: List<Article>,
+    private val onItemClick: (Article) -> Unit
 ) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageViewNews: ImageView = itemView.findViewById(R.id.imageViewNews)
+
         val textViewTitle: TextView = itemView.findViewById(R.id.textViewTitle)
         val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
         val textViewDate: TextView = itemView.findViewById(R.id.textViewDate)
@@ -33,10 +35,14 @@ class NewsAdapter(
         holder.textViewTitle.text = article.title
         holder.textViewDescription.text = article.description
         holder.textViewDate.text = article.publishedAt
+        holder.itemView.setOnClickListener {
+            android.util.Log.d("ITEM_CLICK", "Clicked: ${article.title}")
+            onItemClick(article)
+        }
+        Log.d("IMAGE_URL", "URL: ${article.urlToImage}")
 
         Glide.with(holder.itemView.context)
-            .load(article.urlToImage)
-            .into(holder.imageViewNews)
+
     }
 
     override fun getItemCount(): Int = articleList.size
